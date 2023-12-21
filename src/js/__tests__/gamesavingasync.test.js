@@ -1,0 +1,26 @@
+import GameSavingLoaderAsync from '../gamesavingasync';
+import read from '../reader';
+import json from '../parser';
+
+jest.mock('../reader');
+jest.mock('../parser');
+
+test('Проверка Resolved', async () => {
+  const data = new ArrayBuffer(10);
+  const value = '{"id":9,"created":1546300800,"userInfo":{"id":1,"name":"Hitman","level":10,"points":2000}}';
+  const saving = JSON.parse(value);
+
+  read.mockResolvedValue(data);
+  json.mockResolvedValue(value);
+
+  const result = await GameSavingLoaderAsync.load();
+  expect(result).toEqual(saving);
+});
+
+test('Проверка Rejected', async () => {
+  const error = new Error('Failed to read');
+  read.mockRejectedValue(error);
+
+  await expect(GameSavingLoaderAsync.load()).rejects.toEqual(error);
+});
+

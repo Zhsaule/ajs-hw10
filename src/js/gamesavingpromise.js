@@ -1,21 +1,8 @@
 import read from './reader';
 import json from './parser';
+import GameSaving from './GameSaving';
 
-// export default class GameSavingLoaderPromise {
-//   static load() {
-//     return new Promise(async (resolve, reject) => {
-//       try {
-//         const data = await read();
-//         const value = await json(data);
-//         const saving = JSON.parse(value);
-//         resolve(saving);
-//       } catch (error) {
-//         reject('Failed to read the file');
-//       }
-//     });
-//   }
-// }
-export default class GameSavingLoaderPromise {
+export default class GameSavingLoaderPromise{
   static load() {
     return new Promise((resolve, reject) => {
       read()
@@ -24,7 +11,7 @@ export default class GameSavingLoaderPromise {
         })
         .then((value) => {
           const saving = JSON.parse(value);
-          resolve(saving);
+          resolve(new GameSaving(...Object.values(saving)));
         })
         .catch(() => {
           reject(new Error('Failed to read'));

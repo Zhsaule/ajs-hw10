@@ -1,6 +1,7 @@
 import GameSavingLoaderAsync from '../gamesavingasync';
 import read from '../reader';
 import json from '../parser';
+import GameSaving from '../GameSaving';
 
 jest.mock('../reader');
 jest.mock('../parser');
@@ -8,7 +9,9 @@ jest.mock('../parser');
 test('Проверка Resolved', async () => {
   const data = new ArrayBuffer(10);
   const value = '{"id":9,"created":1546300800,"userInfo":{"id":1,"name":"Hitman","level":10,"points":2000}}';
-  const saving = JSON.parse(value);
+  const saving = new GameSaving(...Object.values(JSON.parse(value)));
+  //JSON.parse(value);
+
 
   read.mockResolvedValue(data);
   json.mockResolvedValue(value);

@@ -1,29 +1,26 @@
 // TODO: write your code here
 import GameSavingLoaderAsync from "./gamesavingasync";
-import GameSavingLoaderPromise from "./gamesavingpromise";
+import GameSavingLoaderPromise from "./GameSavingPromise";
 
 console.log('worked');
 
 //HW9 Promises
-GameSavingLoaderPromise.load()
-  .then((saving) => {
-    // saving - объект класса GameSaving
-    console.log('HW9 Promises');
-    console.log(saving);
-  })
-  .catch((error) => {
-    // обработка ошибки
-    console.log(error);
-  });
+console.log('HW9 Promises');
+const promiseSaving = GameSavingLoaderPromise.load();
+console.log(promiseSaving);
+promiseSaving.then((value) => {
+  console.log(value);
+  // value содержит значение PromiseResult
+});
 
-  
+
 //HW async/await
 (async () => {
   try {
-    const saving = await GameSavingLoaderAsync.load();
+    const asyncSaving = await GameSavingLoaderAsync.load();
     console.log('HW9 async/await');
-    console.log(saving);
-    // saving - объект класса GameSaving
+    console.log(asyncSaving);
+    // asyncSaving - объект класса GameSaving
   } catch (error) {
     // обработка ошибки
     console.log(error);

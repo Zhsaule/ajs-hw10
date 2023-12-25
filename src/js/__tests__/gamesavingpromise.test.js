@@ -1,4 +1,4 @@
-import GameSavingLoaderPromise from '../gamesavingpromise';
+import GameSavingLoaderPromise from '../GameSavingPromise';
 import read from '../reader';
 import json from '../parser';
 import GameSaving from '../GameSaving';

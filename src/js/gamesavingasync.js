@@ -7,8 +7,8 @@ export default class GameSavingLoaderAsync{
     try {
       const data = await read();
       const value = await json(data);
-      const saving = JSON.parse(value)
-      return new GameSaving(...Object.values(saving));
+      const { id, created, userInfo } = JSON.parse(value);
+      return new GameSaving(id, created, userInfo);
     } catch (error) {
       throw new Error('Failed to read');
     }
